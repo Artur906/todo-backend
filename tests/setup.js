@@ -9,9 +9,7 @@ config({
 
 beforeAll(async () => {
   await connectDB()
-})
 
-afterEach(async () => {
   const collections = mongoose.connection.collections
 
   for (const key in collections) {

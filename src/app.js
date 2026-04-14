@@ -2,6 +2,7 @@ import express from 'express'
 import User from './models/User'
 import { config } from 'dotenv'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 config({
   path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env'
@@ -38,6 +39,33 @@ app.post('/auth/register', async (req, res) => {
     id: newUser._id,
     email: newUser.email
   })
+})
+
+app.post('/auth/login', async (req, res) => {
+  const { email, password } = req.body || {}
+
+  if(!email || !password) {
+    return res.status(400).json({ message: 'Invalid credentials' })
+  }
+
+  const user = await User.findOne({ email })
+
+  if(!user) {
+    return res.status(401).json({ message: 'Invalid credentials' })
+  }
+
+  const isValidPassword = await bcrypt.compare(password, user.password)
+
+  if(!isValidPassword) {
+    return res.status(401).json({ message: 'Invalid credentials' })
+  }
+
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' })
+  
+  return res.status(200).json({
+    token
+  })
+
 })
 
 module.exports = app

@@ -1,20 +1,25 @@
 import request from 'supertest'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import app from '../src/app'
 import User from '../src/models/User'
+import { userFactory } from './utils/fakerData'
 
 describe('Auth - Register', async () => {
+  let user 
+
+  beforeEach(async () => {
+    user = userFactory()
+  })
+
   it('should create a new user', async () => {
+
     const response = await request(app)
       .post('/auth/register')
-      .send({
-        email: 'test@email.com',
-        password: '123456'
-      })
+      .send(user)
 
     expect(response.status).toBe(201)
     expect(response.body).toHaveProperty('id')
-    expect(response.body.email).toBe('test@email.com')
+    expect(response.body.email).toBe(user.email)
   })
 
   it('should fail to create a new user without email', async () => {
@@ -42,28 +47,19 @@ describe('Auth - Register', async () => {
   })
 
   it('should not allow duplicate email', async () => {
-    await request(app).post('/auth/register').send({
-      email: 'test@email.com',
-      password: '123456'
-    })
+    await request(app).post('/auth/register').send(user)
 
-    const response = await request(app).post('/auth/register').send({
-      email: 'test@email.com',
-      password: '123456'
-    })
+    const response = await request(app).post('/auth/register').send(user)
 
     expect(response.status).toBe(409)
     expect(response.body.message).toBe('Email already exists')
   })
 
   it('should store hashed password', async () => {
-    await request(app).post('/auth/register').send({
-      email: 'test@email.com',
-      password: '123456'
-    })
+    await request(app).post('/auth/register').send(user)
+    
+    const dbUser = await User.findOne({ email: user.email })
 
-    const user = await User.findOne({ email: 'test@email.com' })
-
-    expect(user.password).not.toBe('123456')
+    expect(dbUser.password).not.toBe(user.password)
   })
 })
