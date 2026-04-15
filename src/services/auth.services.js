@@ -11,9 +11,7 @@ const registerUser = async ({ email, password }) => {
 
   const hashedPassword = await bcrypt.hash(password, 10)
 
-  const newUser = new User({ email, password: hashedPassword })
-
-  await newUser.save()
+  const newUser = await User.create({ email, password: hashedPassword })
 
   return {
     id: newUser._id,

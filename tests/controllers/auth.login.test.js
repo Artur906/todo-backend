@@ -1,7 +1,7 @@
 import request from 'supertest'
 import { describe, it, expect, beforeEach } from 'vitest'
-import app from '../src/app'
-import { userFactory } from './utils/fakerData'
+import app from '../../src/app'
+import { userFactory } from '../utils/fakerData'
 
 describe('Auth - Login', async () => {
   let user
