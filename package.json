@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:controllers": "cross-env NODE_ENV=test vitest run --coverage tests/controllers",
-    "test:services": "vitest run --coverage tests/services"
+    "test:integration": "cross-env NODE_ENV=test vitest run tests/integration",
+    "test:unit": "vitest run tests/unit/",
+    "test": "cross-env NODE_ENV=test vitest run",
+    "coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "",

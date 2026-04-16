@@ -7,4 +7,12 @@ const userFactory = (email, password) => {
   }
 }
 
-export { userFactory }
+const taskFactory = ({title, description, userId}) => {
+  return {
+    title: title || faker.lorem.sentence(),
+    description: description || faker.lorem.paragraph(),
+    userId: userId || 'mocked_user_id'
+  }
+}
+
+export { userFactory, taskFactory }

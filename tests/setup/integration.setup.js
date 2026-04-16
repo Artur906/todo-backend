@@ -1,5 +1,5 @@
 import { beforeAll, afterAll } from 'vitest'
-import { connectDB, disconnectDB } from '../src/database.js'
+import { connectDB, disconnectDB } from '../../src/database.js'
 import { config } from 'dotenv'
 import mongoose from 'mongoose'
 

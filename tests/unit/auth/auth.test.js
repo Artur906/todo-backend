@@ -4,6 +4,8 @@ import { userFactory } from "../../utils/fakerData";
 
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import User from "../../../src/models/User";
+
 const hashMock = vi.spyOn(bcrypt, 'hash')
 const compareMock = vi.spyOn(bcrypt, 'compare')
 const jwtSignMock = vi.spyOn(jwt, 'sign')
