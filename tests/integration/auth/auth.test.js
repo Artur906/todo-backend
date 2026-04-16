@@ -1,9 +1,9 @@
-import '../setup/integration.setup'
+import '../../setup/integration.setup'
 import request from 'supertest'
 import { describe, it, expect, beforeEach } from 'vitest'
-import app from '../../src/app'
-import User from '../../src/models/User'
-import { userFactory } from '../utils/fakerData'
+import app from '../../../src/app'
+import User from '../../../src/models/User'
+import { userFactory } from '../../utils/fakerData'
 
 describe('Auth - Register', async () => {
   let user 
