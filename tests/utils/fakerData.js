@@ -7,7 +7,7 @@ const userFactory = (email, password) => {
   }
 }
 
-const taskFactory = ({title, description, userId}) => {
+const taskFactory = ({title, description, userId} = {}) => {
   return {
     title: title || faker.lorem.sentence(),
     description: description || faker.lorem.paragraph(),

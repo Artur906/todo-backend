@@ -18,7 +18,7 @@ describe('Update Task', async () => {
     const task = taskFactory({ userId })
     task._id = taskId
 
-    mockUpdate.mockResolvedValue({ nModified: 1 })
+    mockUpdate.mockResolvedValue({ modifiedCount: 1 })
     const result = await updateTask(taskId, userId, { title: updatedTitle })
 
     expect(mockUpdate).toHaveBeenCalledTimes(1)
@@ -36,7 +36,7 @@ describe('Update Task', async () => {
     const task = taskFactory({ userId })
     task._id = taskId
 
-    mockUpdate.mockResolvedValue({ nModified: 1 })
+    mockUpdate.mockResolvedValue({ modifiedCount: 1 })
     const result = await updateTask(taskId, userId, { description: updatedDescription })
 
     expect(mockUpdate).toHaveBeenCalledTimes(1)
@@ -52,7 +52,7 @@ describe('Update Task', async () => {
     const taskId = 'mocked_task_id'
     const task = taskFactory({ userId })
     task._id = taskId
-    mockUpdate.mockResolvedValue({ nModified: 1 })
+    mockUpdate.mockResolvedValue({ modifiedCount: 1 })
     const result = await updateTask(taskId, userId, { status: 'completed' })
 
     expect(mockUpdate).toHaveBeenCalledTimes(1)
@@ -68,7 +68,7 @@ describe('Update Task', async () => {
     const taskId = 'mocked_task_id'
     const task = taskFactory({ userId })
     task._id = taskId
-    mockUpdate.mockResolvedValue({ nModified: 1 })
+    mockUpdate.mockResolvedValue({ modifiedCount: 1 })
     const result = await updateTask(taskId, userId, { status: 'pending' })
 
     expect(mockUpdate).toHaveBeenCalledTimes(1)
@@ -96,7 +96,7 @@ describe('Update Task', async () => {
   it('should not update a task that does not exist', async () => {
     const userId = 'mocked_user_id'
     const taskId = 'non_existent_task_id'
-    mockUpdate.mockResolvedValue({ nModified: 0 })
+    mockUpdate.mockResolvedValue({ modifiedCount: 0 })
     const result = await updateTask(taskId, userId, { title: 'Updated Title' })
 
     expect(mockUpdate).toHaveBeenCalledTimes(1)
@@ -106,7 +106,7 @@ describe('Update Task', async () => {
   it('should not update a task that belongs to another user', async () => {
     const userId = 'mocked_user_id'
     const taskId = 'mocked_task_id'
-    mockUpdate.mockResolvedValue({ nModified: 0 })
+    mockUpdate.mockResolvedValue({ modifiedCount: 0 })
     const result = await updateTask(taskId, userId, { title: 'Updated Title' })
 
     expect(mockUpdate).toHaveBeenCalledTimes(1)

@@ -42,7 +42,7 @@ const updateTask = async (taskId, userId, updateData) => {
     { $set: updateData }
   ) 
 
-  return result.nModified > 0
+  return result.modifiedCount > 0
 }
 
 const deleteTask = async (taskId, userId) => {
