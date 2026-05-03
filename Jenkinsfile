@@ -46,7 +46,7 @@ pipeline {
       stage('Wait for API') {
         steps {
             sh 'sleep 5'
-            sh 'curl -f http://localhost:3000 || exit 1'
+            sh 'curl -f http://localhost:3000/tasks || exit 1'
         }
       }
     }
