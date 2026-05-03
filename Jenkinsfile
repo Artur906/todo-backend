@@ -38,8 +38,7 @@ pipeline {
 
       stage('Start Application') {
           steps {
-            sh 'nohup npm start &'
-            sh 'sleep 5'
+            sh 'nohup npm start & echo $! > app.pid && sleep 5'
           }
       }
     }
@@ -48,6 +47,11 @@ pipeline {
         always {
           junit 'reports/*.xml'
           sh "pkill -f node || true"
+           sh '''
+            if [ -f app.pid ]; then
+                kill $(cat app.pid) || true
+            fi
+            '''
         }
         success {
           echo '✅ Tudo certo, pipeline passou'
