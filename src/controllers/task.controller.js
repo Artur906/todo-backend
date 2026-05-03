@@ -1,4 +1,4 @@
-import { createTask, findTasks, findTaskById, updateTask, deleteTask } from "../services/task.services"
+import { createTask, findTasks, findTaskById, updateTask, deleteTask } from "../services/task.services.js"
 
 const create = async (req, res) => {
   const userId = req.user.id
