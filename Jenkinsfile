@@ -36,16 +36,25 @@ pipeline {
           }
       }
 
-      stage('Build') {
+      stage('Start Application') {
           steps {
-            sh 'npm run start'
+            sh 'nohup npm start &'
+            sh 'sleep 5'
           }
+      }
+
+      stage('Wait for API') {
+        steps {
+            sh 'sleep 5'
+            sh 'curl -f http://localhost:3000 || exit 1'
+        }
       }
     }
 
     post {
         always {
           junit 'reports/*.xml'
+          sh "pkill -f node || true"
         }
         success {
           echo '✅ Tudo certo, pipeline passou'
