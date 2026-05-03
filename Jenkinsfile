@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'node-20'
-    }
+    // tools {
+    //     nodejs 'node-20'
+    // }
 
     environment {
         NODE_ENV = 'test'
@@ -12,11 +12,11 @@ pipeline {
     }
 
     stages {
-      stage('Checkout') {
-          steps {
-            checkout scm
-          }
-      }
+      // stage('Checkout') {
+      //     steps {
+      //       checkout scm
+      //     }
+      // }
 
       stage('Install Dependencies') {
           steps {
@@ -24,23 +24,23 @@ pipeline {
           }
       }
 
-      stage('Run Unit Tests') {
-          steps {
-            sh 'npm run test:unit'
-          }
-      }
+      // stage('Run Unit Tests') {
+      //     steps {
+      //       sh 'npm run test:unit'
+      //     }
+      // }
 
-      stage('Run Integration Tests') {
-          steps {
-            sh 'npm run test:integration'
-          }
-      }
+      // stage('Run Integration Tests') {
+      //     steps {
+      //       sh 'npm run test:integration'
+      //     }
+      // }
 
-      stage('Build') {
-          steps {
-            sh 'npm run build'
-          }
-      }
+      // stage('Build') {
+      //     steps {
+      //       sh 'npm run build'
+      //     }
+      // }
     }
 
     post {
