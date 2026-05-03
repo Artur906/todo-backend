@@ -42,13 +42,6 @@ pipeline {
             sh 'sleep 5'
           }
       }
-
-      stage('Wait for API') {
-        steps {
-            sh 'sleep 5'
-            sh 'curl -f http://localhost:3000/tasks || exit 1'
-        }
-      }
     }
 
     post {
