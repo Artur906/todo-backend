@@ -46,12 +46,11 @@ pipeline {
     post {
         always {
           junit 'reports/*.xml'
-          sh "pkill -f node || true"
-           sh '''
-            if [ -f app.pid ]; then
-                kill $(cat app.pid) || true
-            fi
-            '''
+          sh '''
+          if [ -f app.pid ]; then
+              kill $(cat app.pid) || true
+          fi
+          '''
         }
         success {
           echo '✅ Tudo certo, pipeline passou'
