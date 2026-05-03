@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:integration": "cross-env NODE_ENV=test vitest run tests/integration",
-    "test:unit": "vitest run tests/unit/",
-    "test": "cross-env NODE_ENV=test vitest run",
+    "test:integration": "cross-env NODE_ENV=test vitest run tests/integration --reporter=junit --outputFile=reports/integration.xml",
+    "test:unit": "vitest run tests/unit/ --reporter=junit --outputFile=reports/unit.xml",
+    "test": "cross-env NODE_ENV=test vitest run tests/ --reporter=junit --outputFile=reports/all-tests.xml",
     "coverage": "vitest run --coverage"
   },
   "keywords": [],
