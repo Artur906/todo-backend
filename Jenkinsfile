@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'node-20'
+    }
+
     environment {
         NODE_ENV = 'test'
         MONGO_URI = credentials('test-mongo-uri')
